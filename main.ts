@@ -11,28 +11,52 @@ function get_rt () {
             rt = (input.runningTime() - st_time) / 1000
             pins.digitalWritePin(DigitalPin.P0, 0)
             basic.showNumber(rt)
-            mode = 999
+            rt_data.push(rt)
+            kaisuu += 1
+            if (kaisuu == n) {
+                mode = 999
+                print_result()
+            } else {
+                while (pins.digitalReadPin(DigitalPin.P1) == 1) {
+                	
+                }
+                mode = 1
+            }
         }
     }
 }
 input.onButtonPressed(Button.A, function () {
     basic.showIcon(IconNames.Square)
     mode = 1
+    rt_data = []
+    kaisuu = 0
     basic.pause(500)
     basic.clearScreen()
 })
+function print_result () {
+    serial.writeLine("-----result------")
+    for (let カウンター = 0; カウンター <= n - 1; カウンター++) {
+        serial.writeNumber(カウンター + 1)
+        serial.writeValue("  ", rt_data[カウンター])
+    }
+    serial.writeLine("----------------")
+}
 function junbi () {
     basic.pause(1000)
     pins.digitalWritePin(DigitalPin.P0, 0)
     mode = 2
 }
+let kaisuu = 0
+let rt_data: number[] = []
 let rt = 0
 let st_time = 0
+let n = 0
 let mode = 0
-basic.showString("RT Pro")
+basic.showString("RT02")
 mode = 999
 pins.setPull(DigitalPin.P1, PinPullMode.PullDown)
-let kaisuu = 0
+n = 5
+serial.writeLine("(Pro RT02)")
 basic.forever(function () {
     if (mode != 999) {
         if (mode == 1) {
