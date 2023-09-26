@@ -5,7 +5,8 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "基礎統計量2": "github:rock204/basicstat2#master"
+        "基礎統計量2": "github:rock204/basicstat2#master",
+        "datalogger": "*"
     },
     "files": [
         "main.blocks",

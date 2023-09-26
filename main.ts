@@ -13,6 +13,7 @@ function get_rt () {
             basic.showNumber(rt)
             rt_data.push(rt)
             kaisuu += 1
+            datalogger.log(datalogger.createCV("RT", rt))
             if (kaisuu == n) {
                 mode = 999
                 print_result()
@@ -30,6 +31,7 @@ input.onButtonPressed(Button.A, function () {
     mode = 1
     rt_data = []
     kaisuu = 0
+    datalogger.deleteLog(datalogger.DeleteType.Full)
     basic.pause(500)
     basic.clearScreen()
 })
@@ -63,8 +65,10 @@ let mode = 0
 basic.showString("RT02")
 mode = 999
 pins.setPull(DigitalPin.P1, PinPullMode.PullDown)
-n = 5
+n = 10
 serial.writeLine("(Pro RT02)")
+datalogger.mirrorToSerial(false)
+datalogger.setColumnTitles("RT")
 basic.forever(function () {
     if (mode != 999) {
         if (mode == 1) {
