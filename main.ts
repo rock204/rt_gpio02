@@ -40,12 +40,20 @@ function print_result () {
         serial.writeValue("  ", rt_data[カウンター])
     }
     serial.writeLine("----------------")
+    avrage = BasicStat.calculateMean(rt_data)
+    basic.showNumber(avrage)
+    serial.writeValue("average", avrage)
+    serial.writeValue("std    ", BasicStat.calculateES(rt_data))
 }
+input.onButtonPressed(Button.B, function () {
+    basic.showNumber(avrage)
+})
 function junbi () {
     basic.pause(1000)
     pins.digitalWritePin(DigitalPin.P0, 0)
     mode = 2
 }
+let avrage = 0
 let kaisuu = 0
 let rt_data: number[] = []
 let rt = 0
