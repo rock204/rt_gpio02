@@ -14,7 +14,7 @@ function get_rt () {
             rt_data.push(rt)
             kaisuu += 1
             datalogger.log(datalogger.createCV("RT", rt))
-            if (kaisuu == n) {
+            if (kaisuu == n - 1) {
                 mode = 999
                 print_result()
             } else {
